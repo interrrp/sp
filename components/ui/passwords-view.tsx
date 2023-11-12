@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import {
   Table,
   TableBody,
@@ -26,7 +27,15 @@ export default function PasswordsView(props: PasswordsViewProps) {
         {props.passwords.map((password) => (
           <TableRow key={password.name}>
             <TableCell>{password.name}</TableCell>
-            <TableCell>{password.password}</TableCell>
+            <TableCell className="flex justify-between items-center">
+              {password.password}
+              <Button
+                variant="outline"
+                onClick={() => navigator.clipboard.writeText(password.password)}
+              >
+                Copy
+              </Button>
+            </TableCell>
           </TableRow>
         ))}
       </TableBody>
