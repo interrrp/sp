@@ -26,9 +26,9 @@ export default function PasswordInput(props: PasswordInputProps) {
   }
 
   return (
-    <form action={onSubmit} className="flex gap-2">
-      <Input name="name" placeholder="Name" autoComplete="off" />
-      <Input name="password" placeholder="Password" autoComplete="off" />
+    <form action={onSubmit} className="flex gap-2" autoComplete="off">
+      <Input name="name" placeholder="Name" />
+      <Input name="password" type="password" placeholder="Password" />
       <Button type="submit">Add</Button>
     </form>
   );

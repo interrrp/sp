@@ -1,4 +1,4 @@
-import { Trash } from "lucide-react";
+import { Dot, Trash } from "lucide-react";
 
 import {
   AlertDialog,
@@ -42,7 +42,12 @@ export default function PasswordsView(props: PasswordsViewProps) {
           <TableRow key={password.name}>
             <TableCell>{password.name}</TableCell>
             <TableCell className="flex justify-between items-center">
-              {password.password}
+              <span className="-ml-3">
+                {Array.from(Array(10).keys()).map((char, index) => (
+                  <Dot key={index} size={32} className="inline -mr-6" />
+                ))}
+              </span>
+
               <div className="flex gap-2">
                 <Button
                   variant="outline"
