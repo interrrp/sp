@@ -31,7 +31,28 @@ export default function Home() {
           }}
         />
       </div>
-      <PasswordsView passwords={passwords as Password[]} className="mt-12" />
+      <PasswordsView
+        passwords={passwords as Password[]}
+        onRemove={(name) => {
+          setPasswords((passwords) => {
+            if (!passwords) return;
+
+            const index = passwords.findIndex(
+              (password) => password.name === name
+            );
+            if (index === -1) return passwords;
+            const newPasswords = [...passwords];
+            newPasswords.splice(index, 1);
+            return newPasswords;
+          });
+
+          toast({
+            title: "Password removed",
+            description: `Password for "${name}" removed successfully`,
+          });
+        }}
+        className="mt-12"
+      />
     </main>
   );
 }
