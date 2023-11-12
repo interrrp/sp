@@ -10,7 +10,7 @@ import Password from "@/lib/password";
 export default function Home() {
   const [passwords, setPasswords] = useLocalStorage<Password[]>(
     "passwords",
-    []
+    [],
   );
   useEffectOnce(() => {
     if (!passwords) setPasswords([]);
@@ -38,7 +38,7 @@ export default function Home() {
             if (!passwords) return;
 
             const index = passwords.findIndex(
-              (password) => password.name === name
+              (password) => password.name === name,
             );
             if (index === -1) return passwords;
             const newPasswords = [...passwords];
