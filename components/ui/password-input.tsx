@@ -11,7 +11,7 @@ export default function PasswordInput(props: PasswordInputProps) {
   function onSubmit(data: FormData) {
     const name = data.get("name") as string;
     const password = data.get("password") as string;
-    if (!isEmpty(name) || !isEmpty(password))
+    if (!isEmpty(name) && !isEmpty(password))
       props.onSubmit({ name, password });
   }
 
