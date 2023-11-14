@@ -11,7 +11,7 @@ export default function Home() {
   const [passwords, setPasswords] = useLocalStorage<Password[]>(
     "passwords",
     [],
-  );
+  ) as unknown as [Password[], (passwords: Password[]) => void];
   useEffectOnce(() => {
     if (!passwords) setPasswords([]);
   });
@@ -23,7 +23,7 @@ export default function Home() {
       <div className="sticky z-10 top-8 backdrop-blur-lg p-4 border rounded-md">
         <PasswordInput
           onSubmit={(password) => {
-            setPasswords([...(passwords as Password[]), password]);
+            setPasswords([...passwords, password]);
             toast({
               title: "Password added",
               description: `Password for "${password.name}" added successfully`,
@@ -31,21 +31,11 @@ export default function Home() {
           }}
         />
       </div>
+
       <PasswordsView
         passwords={passwords as Password[]}
         onRemove={(name) => {
-          setPasswords((passwords) => {
-            if (!passwords) return;
-
-            const index = passwords.findIndex(
-              (password) => password.name === name,
-            );
-            if (index === -1) return passwords;
-            const newPasswords = [...passwords];
-            newPasswords.splice(index, 1);
-            return newPasswords;
-          });
-
+          setPasswords(passwords.filter((password) => password.name !== name));
           toast({
             title: "Password removed",
             description: `Password for "${name}" removed successfully`,
