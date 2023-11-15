@@ -1,20 +1,21 @@
 "use client";
 
-import { useEffectOnce, useLocalStorage } from "react-use";
+import { useLocalStorage } from "react-use";
 
 import PasswordInput from "@/components/ui/password-input";
-import PasswordsView from "@/components/ui/passwords-view";
 import { useToast } from "@/components/ui/use-toast";
 import Password from "@/lib/password";
+import dynamic from "next/dynamic";
+
+const PasswordsView = dynamic(() => import("@/components/ui/passwords-view"), {
+  ssr: false,
+});
 
 export default function Home() {
   const [passwords, setPasswords] = useLocalStorage<Password[]>(
     "passwords",
     [],
   ) as unknown as [Password[], (passwords: Password[]) => void];
-  useEffectOnce(() => {
-    if (!passwords) setPasswords([]);
-  });
 
   const { toast } = useToast();
 

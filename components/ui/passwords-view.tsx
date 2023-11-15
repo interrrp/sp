@@ -1,5 +1,3 @@
-"use client";
-
 import { Dot, Trash } from "lucide-react";
 
 import {
